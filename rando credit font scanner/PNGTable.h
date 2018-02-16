@@ -1,22 +1,22 @@
 #pragma once
 #include "Utility.h"
 
-class Table2BPP;
+class SNESTable;
 class Bitmap;
 
-class Table8BPP {
+class PNGTable {
 public:
   Bitmap generateBitmap() const;
-  Table2BPP compact() const;
+  SNESTable compact() const;
 
 private:
   ByteArray data;
 
-  friend class Table2BPP;
-  Table8BPP(const Table2BPP& data);
+  friend class SNESTable;
+  PNGTable(const SNESTable& data);
 
   friend class Bitmap;
-  Table8BPP(const Bitmap& bmp);
+  PNGTable(const Bitmap& bmp);
 
   static size_t tileOffset(size_t i);
   static const uint16_t EXPANDED_REVERSED_BYTES[256];

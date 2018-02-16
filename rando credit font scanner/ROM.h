@@ -2,14 +2,14 @@
 #include "Utility.h"
 #include <string>
 
-class Table2BPP;
+class SNESTable;
 
 class ROM {
 public:
   ROM(const std::string& filename);
 
-  Table2BPP extractTable() const;
-  void injectTable(const Table2BPP& table);
+  SNESTable extractTable() const;
+  void injectTable(const SNESTable& table);
   void save(const std::string& filename);
 
 private:

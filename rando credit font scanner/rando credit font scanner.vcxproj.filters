@@ -24,16 +24,16 @@
     <ClCompile Include="ROM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Table2BPP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Table8BPP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SNESTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PNGTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,16 +44,16 @@
     <ClInclude Include="ROM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Table2BPP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Table8BPP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SNESTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PNGTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

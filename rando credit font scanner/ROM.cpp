@@ -1,20 +1,20 @@
 #include "ROM.h"
 #include "Utility.h"
 #include <algorithm>
-#include "Table2BPP.h"
+#include "SNESTable.h"
 
 ROM::ROM(const std::string & filename) : data(Utility::loadFile(filename)), tableOffset(findTableOffset()) {
   if(data.size() != 2 * MB) { throw std::runtime_error("ROM::ROM() - Invalid ROM file length."); }
 }
 
-Table2BPP ROM::extractTable() const {
+SNESTable ROM::extractTable() const {
   auto head = data.begin() + tableOffset;
   auto tail = head + NATIVE_TABLE_LENGTH;
 
-  return Table2BPP(ByteArray(head, tail));
+  return SNESTable(ByteArray(head, tail));
 }
 
-void ROM::injectTable(const Table2BPP& table) {
+void ROM::injectTable(const SNESTable& table) {
   auto head = data.begin() + tableOffset;
   std::copy(table.data.begin(), table.data.end(), head);
 }

@@ -1,8 +1,6 @@
 #pragma once
 #include <wincodec.h>
 #include <atlbase.h>
-#include <vector>
-#include <string>
 #include <tuple>
 #include "Utility.h"
 

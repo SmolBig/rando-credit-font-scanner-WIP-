@@ -1,39 +1,39 @@
-#include "Table8BPP.h"
-#include "Table2BPP.h"
+#include "PNGTable.h"
+#include "SNESTable.h"
 #include <algorithm>
 #include "Bitmap.h"
 
-Bitmap Table8BPP::generateBitmap() const {
+Bitmap PNGTable::generateBitmap() const {
   return Bitmap(*this);
 }
 
-Table2BPP Table8BPP::compact() const {
-  return Table2BPP(*this);
+SNESTable PNGTable::compact() const {
+  return SNESTable(*this);
 }
 
-Table8BPP::Table8BPP(const Table2BPP& compressed) {
+PNGTable::PNGTable(const SNESTable& compressed) {
   auto& cData = compressed.data;
 
-  data.reserve(cData.size() * Table2BPP::TEXELS_PER_BYTE);
+  data.reserve(cData.size() * SNESTable::TEXELS_PER_BYTE);
 
   for(size_t i = 0; i < (cData.size() - 1); i += 2) {
     uint16_t interleaved = interleaveBytes(cData[i], cData[i+1]);
-    for(int s = 0; s < Table2BPP::TEXELS_PER_BYTE * 2; s++) {
+    for(int s = 0; s < SNESTable::TEXELS_PER_BYTE * 2; s++) {
       data.push_back(interleaved & 0b11);
       interleaved >>= 2;
     }
   }
 }
 
-Table8BPP::Table8BPP(const Bitmap& bmp) {
-  throw std::exception("Table8BPP::Table8BPP(const Bitmap& bmp) - Not yet implemented."); //~~_
+PNGTable::PNGTable(const Bitmap& bmp) {
+  throw std::exception("PNGTable::PNGTable(const Bitmap& bmp) - Not yet implemented."); //~~_
 }
 
-size_t Table8BPP::tileOffset(size_t i) {
+size_t PNGTable::tileOffset(size_t i) {
   return i * TILE_LENGTH;
 }
 
-const uint16_t Table8BPP::EXPANDED_REVERSED_BYTES[256] = {
+const uint16_t PNGTable::EXPANDED_REVERSED_BYTES[256] = {
   0b0000000000000000, 0b1100000000000000, 0b0011000000000000, 0b1111000000000000, 0b0000110000000000, 0b1100110000000000, 0b0011110000000000, 0b1111110000000000,
   0b0000001100000000, 0b1100001100000000, 0b0011001100000000, 0b1111001100000000, 0b0000111100000000, 0b1100111100000000, 0b0011111100000000, 0b1111111100000000,
   0b0000000011000000, 0b1100000011000000, 0b0011000011000000, 0b1111000011000000, 0b0000110011000000, 0b1100110011000000, 0b0011110011000000, 0b1111110011000000,
@@ -68,7 +68,7 @@ const uint16_t Table8BPP::EXPANDED_REVERSED_BYTES[256] = {
   0b0000001111111111, 0b1100001111111111, 0b0011001111111111, 0b1111001111111111, 0b0000111111111111, 0b1100111111111111, 0b0011111111111111, 0b1111111111111111
 };
 
-uint16_t Table8BPP::interleaveBytes(byte hi, byte lo) {
+uint16_t PNGTable::interleaveBytes(byte hi, byte lo) {
   uint16_t hiWide = EXPANDED_REVERSED_BYTES[hi] & 0b1010101010101010;
   uint16_t loWide = EXPANDED_REVERSED_BYTES[lo] & 0b0101010101010101;
   return hiWide | loWide;

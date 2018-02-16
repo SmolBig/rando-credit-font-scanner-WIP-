@@ -2,22 +2,22 @@
 #include "Utility.h"
 #include <tuple>
 
-class Table8BPP;
+class PNGTable;
 class ROM;
 
-class Table2BPP {
+class SNESTable {
 public:
-  Table8BPP expand() const;
+  PNGTable expand() const;
 
 private:
   ByteArray data;
   static const size_t LENGTH = 0x2000;
 
   friend class ROM;
-  Table2BPP(const ByteArray& romData);
+  SNESTable(const ByteArray& romData);
 
-  friend class Table8BPP;
-  Table2BPP(const Table8BPP& expanded);
+  friend class PNGTable;
+  SNESTable(const PNGTable& expanded);
 
   static constexpr size_t TEXELS_PER_BYTE = 4;
 

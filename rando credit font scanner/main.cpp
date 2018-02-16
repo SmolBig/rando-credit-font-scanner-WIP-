@@ -1,6 +1,6 @@
 #include "ROM.h"
-#include "Table2BPP.h"
-#include "Table8BPP.h"
+#include "SNESTable.h"
+#include "PNGTable.h"
 #include "Bitmap.h"
 
 int main() {
