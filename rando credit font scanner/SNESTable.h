@@ -22,7 +22,7 @@ private:
   static constexpr size_t TEXELS_PER_BYTE = 4;
 
   std::pair<byte, byte> deinterleave(uint16_t duo);
-  uint16_t compact(const ByteArray& texels);
+  uint16_t compact(ByteArray::const_reverse_iterator head, ByteArray::const_reverse_iterator tail);
 
 };
 

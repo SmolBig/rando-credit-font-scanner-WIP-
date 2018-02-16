@@ -26,7 +26,11 @@ PNGTable::PNGTable(const SNESTable& compressed) {
 }
 
 PNGTable::PNGTable(const Bitmap& bmp) {
-  throw std::exception("PNGTable::PNGTable(const Bitmap& bmp) - Not yet implemented."); //~~_
+  for(size_t i = 0; i < TILE_COUNT; i++) {
+    auto readHead  = bmp.data.begin() + tileOffset(i);
+    auto writeHead = data.begin() + Bitmap::tileOffset(i);
+    Bitmap::renderTile(readHead, writeHead);
+  }
 }
 
 size_t PNGTable::tileOffset(size_t i) {
