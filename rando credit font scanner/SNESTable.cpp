@@ -11,9 +11,13 @@ SNESTable::SNESTable(const ByteArray& romData) : data(romData) {
 
 SNESTable::SNESTable(const PNGTable& expanded) {
   constexpr size_t SLICE_LENGTH = TEXELS_PER_BYTE * 2;
-  
-  for(auto iter = expanded.data.rbegin(); iter != expanded.data.rend(); iter += SLICE_LENGTH) {
-    uint16_t compacted = compact(iter, iter + SLICE_LENGTH);
+
+  auto iter = expanded.data.begin();
+  while(iter != expanded.data.end()) {
+    iter += SLICE_LENGTH;
+
+    ByteArray::const_reverse_iterator riter(iter);
+    uint16_t compacted = compact(riter, riter + SLICE_LENGTH);
 
     std::pair<byte, byte> bytes = deinterleave(compacted);
 
@@ -47,5 +51,6 @@ uint16_t SNESTable::compact(ByteArray::const_reverse_iterator head, ByteArray::c
 
   return duo;
 }
+
 
 

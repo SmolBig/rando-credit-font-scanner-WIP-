@@ -24,7 +24,7 @@ private:
   friend class PNGTable;
   Bitmap(const PNGTable& table);
 
-  static void renderTile(ByteArray::const_iterator readHead, ByteArray::iterator writeHead);
+  static void renderTile(ByteArray::const_iterator readHead, size_t readStride, ByteArray::iterator writeHead, size_t writeStride);
   static size_t tileOffset(size_t i);
 
   static constexpr byte GREEN = 4;

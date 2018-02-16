@@ -4,6 +4,7 @@
 
 Bitmap::Bitmap(const std::string& filename) {
   std::tie(width, height, data) = ImageCodec::loadFromFile(filename);
+  if((width != TEXTURE_WIDTH) || (height != TEXTURE_HEIGHT)) { throw std::runtime_error("Bitmap::Bitmap(const std::string& filename) - Bitmap dimensions incorrect."); }
 }
 
 PNGTable Bitmap::convert() const {
@@ -18,15 +19,15 @@ Bitmap::Bitmap(const PNGTable& table) : width(TEXTURE_WIDTH), height(TEXTURE_HEI
   for(size_t i = 0; i < PNGTable::TILE_COUNT; i++) {
     auto readHead  = table.data.begin() + PNGTable::tileOffset(i);
     auto writeHead = data.begin() + tileOffset(i);
-    renderTile(readHead, writeHead);
+    renderTile(readHead, PNGTable::TILE_WIDTH, writeHead, TEXTURE_WIDTH);
   }
 }
 
-void Bitmap::renderTile(ByteArray::const_iterator readHead, ByteArray::iterator writeHead) {
+void Bitmap::renderTile(ByteArray::const_iterator readHead, size_t readStride, ByteArray::iterator writeHead, size_t writeStride) {
   for(int y = 0; y < PNGTable::TILE_HEIGHT; y++) {
     std::copy(readHead, readHead + PNGTable::TILE_WIDTH, writeHead);
-    readHead += PNGTable::TILE_WIDTH;
-    writeHead += TEXTURE_WIDTH;
+    readHead += readStride;
+    writeHead += writeStride;
   }
 }
 

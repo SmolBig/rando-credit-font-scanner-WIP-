@@ -25,11 +25,11 @@ PNGTable::PNGTable(const SNESTable& compressed) {
   }
 }
 
-PNGTable::PNGTable(const Bitmap& bmp) {
+PNGTable::PNGTable(const Bitmap& bmp) : data(TILE_LENGTH * TILE_COUNT) {
   for(size_t i = 0; i < TILE_COUNT; i++) {
-    auto readHead  = bmp.data.begin() + tileOffset(i);
-    auto writeHead = data.begin() + Bitmap::tileOffset(i);
-    Bitmap::renderTile(readHead, writeHead);
+    auto readHead  = bmp.data.begin() + Bitmap::tileOffset(i);
+    auto writeHead = data.begin() + tileOffset(i);
+    Bitmap::renderTile(readHead, Bitmap::TEXTURE_WIDTH, writeHead, TILE_WIDTH);
   }
 }
 
