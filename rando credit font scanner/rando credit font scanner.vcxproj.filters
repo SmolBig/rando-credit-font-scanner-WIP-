@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bitmap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BitmapNew.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ImageCodec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,20 +30,14 @@
     <ClCompile Include="Table8BPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Table32BPP.cpp">
+    <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.cpp">
+    <ClCompile Include="Bitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bitmap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BitmapNew.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ImageCodec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,10 +50,10 @@
     <ClInclude Include="Table8BPP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Table32BPP.h">
+    <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utility.h">
+    <ClInclude Include="Bitmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,4 +16,5 @@ union uColor {
 namespace Utility {
   ByteArray loadFile(const std::string& fname);
   void saveFile(const std::string& fname, const ByteArray& data);
+  std::wstring expandString(const std::string& in);
 }

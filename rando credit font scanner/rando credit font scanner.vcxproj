@@ -116,22 +116,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="BitmapNew.cpp" />
     <ClCompile Include="ImageCodec.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ROM.cpp" />
     <ClCompile Include="Table2BPP.cpp" />
-    <ClCompile Include="Table32BPP.cpp" />
     <ClCompile Include="Table8BPP.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
-    <ClInclude Include="BitmapNew.h" />
     <ClInclude Include="ImageCodec.h" />
     <ClInclude Include="ROM.h" />
     <ClInclude Include="Table2BPP.h" />
-    <ClInclude Include="Table32BPP.h" />
     <ClInclude Include="Table8BPP.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

@@ -22,3 +22,11 @@ void Utility::saveFile(const std::string& fname, const ByteArray& data) {
   file.write((const char*)data.data(), data.size());
 }
 
+std::wstring Utility::expandString(const std::string& in) {
+  size_t dumbNum;
+  std::wstring out;
+  out.resize(in.size() + 1);
+  mbstowcs_s(&dumbNum, &out[0], out.size(), in.data(), in.size());
+  return out;
+}
+

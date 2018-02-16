@@ -6,21 +6,18 @@
 #include <tuple>
 #include "Utility.h"
 
-using TextureData = std::tuple<UINT, UINT, std::vector<uint32_t>>;
+using TextureData = std::tuple<UINT, UINT, ByteArray>;
 
 class ImageCodec {
 public:
   static TextureData loadFromFile(const std::string& fname);
-  static void saveToFile(const std::string& fname, TextureData texture);
-
-  static void savePackedToFile(const std::string& fname, const ByteArray& table);
+  static void saveToFile(const std::string& fname, const TextureData& texture);
 
 private:
   static CComPtr<IWICImagingFactory> factory;
   static const WICPixelFormatGUID format;
-  static constexpr size_t BYTES_PER_PIXEL = 4;
+  static constexpr size_t BYTES_PER_PIXEL = 1;
 
-  static std::wstring expandString(const std::string& in);
   static void initialize();
 
 };

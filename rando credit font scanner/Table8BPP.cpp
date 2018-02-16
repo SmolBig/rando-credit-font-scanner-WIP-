@@ -1,19 +1,14 @@
 #include "Table8BPP.h"
 #include "Table2BPP.h"
-#include "Table32BPP.h"
 #include <algorithm>
-#include "BitmapNew.h"
+#include "Bitmap.h"
 
-Table32BPP Table8BPP::expand() const {
-  return Table32BPP(*this);
+Bitmap Table8BPP::generateBitmap() const {
+  return Bitmap(*this);
 }
 
-Table2BPP Table8BPP::compress() const {
+Table2BPP Table8BPP::compact() const {
   return Table2BPP(*this);
-}
-
-BitmapNew Table8BPP::generateBitmap() const {
-  return BitmapNew(*this);
 }
 
 Table8BPP::Table8BPP(const Table2BPP& compressed) {
@@ -30,48 +25,12 @@ Table8BPP::Table8BPP(const Table2BPP& compressed) {
   }
 }
 
-Table8BPP::Table8BPP(const Table32BPP& colorTable) : data(colorTable.data.size()) {
-  std::transform(colorTable.data.begin(), colorTable.data.end(), data.begin(), getNearestIndex);
-}
-
-Table8BPP::Table8BPP(const BitmapNew& bmp) {
-  //~~_
+Table8BPP::Table8BPP(const Bitmap& bmp) {
+  throw std::exception("Table8BPP::Table8BPP(const Bitmap& bmp) - Not yet implemented."); //~~_
 }
 
 size_t Table8BPP::tileOffset(size_t i) {
   return i * TILE_LENGTH;
-}
-
-uint32_t Table8BPP::getColor(byte index) {
-  return Table32BPP::PALETTE[index];
-}
-
-int Table8BPP::colorDistance(uColor a, uColor b) {
-  int diff = 0;
-  diff += abs((int)a.r - b.r);
-  diff += abs((int)a.g - b.g);
-  diff += abs((int)a.b - b.b);
-  return diff;
-}
-
-byte Table8BPP::getNearestIndex(uint32_t color) {
-  uColor texel;
-  texel.value = color;
-
-  byte nearest = -1;
-  int minDiff = INT32_MAX;
-  for(int index = 0; index < 4; index++) {
-    uColor paletteColor;
-    paletteColor.value = Table32BPP::PALETTE[index];
-
-    int diff = colorDistance(texel, paletteColor);
-    if(diff < minDiff) {
-      nearest = index;
-      minDiff = diff;
-    }
-  }
-
-  return nearest;
 }
 
 const uint16_t Table8BPP::EXPANDED_REVERSED_BYTES[256] = {
