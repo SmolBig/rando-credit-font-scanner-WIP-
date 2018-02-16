@@ -1,0 +1,31 @@
+A9 02     LDA.b #$02
+8D 01 21  STA $2101
+A9 80     LDA.b #$80
+8D 15 21  STA $2115
+A9 XX     LDA.b #FontGfx>>16
+85 02     STA $02
+C2 30     REP #$30
+A9 00 70  LDA.w #$7000
+8D 16 21  STA $2116
+A9 ZZ YY  LDA.w #FontGfx
+85 00     STA $00
+
+Font can be found at SNES address $XX:YYZZ
+
+Smallhacker - Today at 3:54 PM
+SNES addresses can be complex, but for the lower banks (0x00-0x3F) in most
+cartridges, it's pretty simple.
+
+SNES -> PC: Keep the lower 15 bits, remove the 16 bit, shift the
+upper 8 bits down one bit
+
+PC -> SNES: Keep the lower 15 bits, shift the rest up by one bit,
+OR the result with 0x8000
+
+SNES $00:8000 = PC 0x000000
+SNES $00:FFFF = PC 0x007FFF
+SNES $01:8000 = PC 0x008000
+SNES $01:FFFF = PC 0x00FFFF
+SNES $02:8000 = PC 0x010000
+...
+SNES $20:8000 = PC 0x100000
