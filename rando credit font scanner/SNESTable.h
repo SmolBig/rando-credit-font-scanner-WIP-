@@ -2,12 +2,12 @@
 #include "Utility.h"
 #include <tuple>
 
-class PNGTable;
+class IndexedTable;
 class ROM;
 
 class SNESTable {
 public:
-  PNGTable expand() const;
+  IndexedTable expand() const;
 
 private:
   ByteArray data;
@@ -16,8 +16,8 @@ private:
   friend class ROM;
   SNESTable(const ByteArray& romData);
 
-  friend class PNGTable;
-  SNESTable(const PNGTable& expanded);
+  friend class IndexedTable;
+  SNESTable(const IndexedTable& expanded);
 
   static constexpr size_t TEXELS_PER_BYTE = 4;
 

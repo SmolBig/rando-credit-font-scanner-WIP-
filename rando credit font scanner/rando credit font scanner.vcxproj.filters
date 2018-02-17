@@ -33,7 +33,7 @@
     <ClCompile Include="SNESTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PNGTable.cpp">
+    <ClCompile Include="IndexedTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +53,7 @@
     <ClInclude Include="SNESTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PNGTable.h">
+    <ClInclude Include="IndexedTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

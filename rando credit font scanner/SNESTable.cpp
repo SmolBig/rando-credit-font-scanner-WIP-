@@ -1,15 +1,15 @@
 #include "SNESTable.h"
-#include "PNGTable.h"
+#include "IndexedTable.h"
 
-PNGTable SNESTable::expand() const {
-  return PNGTable(*this);
+IndexedTable SNESTable::expand() const {
+  return IndexedTable(*this);
 }
 
 SNESTable::SNESTable(const ByteArray& romData) : data(romData) {
   //nop
 }
 
-SNESTable::SNESTable(const PNGTable& expanded) {
+SNESTable::SNESTable(const IndexedTable& expanded) {
   constexpr size_t SLICE_LENGTH = TEXELS_PER_BYTE * 2;
 
   auto iter = expanded.data.begin();
@@ -32,11 +32,11 @@ std::pair<byte,byte> SNESTable::deinterleave(uint16_t duo) {
   uint16_t loWide = duo & 0b0101010101010101;
   loWide |= (loWide << 1);
 
-  auto hiIter = std::find(std::begin(PNGTable::EXPANDED_REVERSED_BYTES), std::end(PNGTable::EXPANDED_REVERSED_BYTES), hiWide);
-  auto loIter = std::find(std::begin(PNGTable::EXPANDED_REVERSED_BYTES), std::end(PNGTable::EXPANDED_REVERSED_BYTES), loWide);
+  auto hiIter = std::find(std::begin(IndexedTable::EXPANDED_REVERSED_BYTES), std::end(IndexedTable::EXPANDED_REVERSED_BYTES), hiWide);
+  auto loIter = std::find(std::begin(IndexedTable::EXPANDED_REVERSED_BYTES), std::end(IndexedTable::EXPANDED_REVERSED_BYTES), loWide);
 
-  ptrdiff_t hi = hiIter - std::begin(PNGTable::EXPANDED_REVERSED_BYTES);
-  ptrdiff_t lo = loIter - std::begin(PNGTable::EXPANDED_REVERSED_BYTES);
+  ptrdiff_t hi = hiIter - std::begin(IndexedTable::EXPANDED_REVERSED_BYTES);
+  ptrdiff_t lo = loIter - std::begin(IndexedTable::EXPANDED_REVERSED_BYTES);
 
   return std::make_pair((byte)hi, (byte)lo);
 }

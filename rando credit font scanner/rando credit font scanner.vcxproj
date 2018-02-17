@@ -120,7 +120,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ROM.cpp" />
     <ClCompile Include="SNESTable.cpp" />
-    <ClCompile Include="PNGTable.cpp" />
+    <ClCompile Include="IndexedTable.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +128,7 @@
     <ClInclude Include="ImageCodec.h" />
     <ClInclude Include="ROM.h" />
     <ClInclude Include="SNESTable.h" />
-    <ClInclude Include="PNGTable.h" />
+    <ClInclude Include="IndexedTable.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>

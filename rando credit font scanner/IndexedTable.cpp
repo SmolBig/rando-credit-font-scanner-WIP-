@@ -1,17 +1,17 @@
-#include "PNGTable.h"
+#include "IndexedTable.h"
 #include "SNESTable.h"
 #include <algorithm>
 #include "Bitmap.h"
 
-Bitmap PNGTable::generateBitmap() const {
+Bitmap IndexedTable::generateBitmap() const {
   return Bitmap(*this);
 }
 
-SNESTable PNGTable::compact() const {
+SNESTable IndexedTable::compact() const {
   return SNESTable(*this);
 }
 
-PNGTable::PNGTable(const SNESTable& compressed) {
+IndexedTable::IndexedTable(const SNESTable& compressed) {
   auto& cData = compressed.data;
 
   data.reserve(cData.size() * SNESTable::TEXELS_PER_BYTE);
@@ -25,7 +25,7 @@ PNGTable::PNGTable(const SNESTable& compressed) {
   }
 }
 
-PNGTable::PNGTable(const Bitmap& bmp) : data(TILE_LENGTH * TILE_COUNT) {
+IndexedTable::IndexedTable(const Bitmap& bmp) : data(TILE_LENGTH * TILE_COUNT) {
   for(size_t i = 0; i < TILE_COUNT; i++) {
     auto readHead  = bmp.data.begin() + Bitmap::tileOffset(i);
     auto writeHead = data.begin() + tileOffset(i);
@@ -33,11 +33,11 @@ PNGTable::PNGTable(const Bitmap& bmp) : data(TILE_LENGTH * TILE_COUNT) {
   }
 }
 
-size_t PNGTable::tileOffset(size_t i) {
+size_t IndexedTable::tileOffset(size_t i) {
   return i * TILE_LENGTH;
 }
 
-const uint16_t PNGTable::EXPANDED_REVERSED_BYTES[256] = {
+const uint16_t IndexedTable::EXPANDED_REVERSED_BYTES[256] = {
   0b0000000000000000, 0b1100000000000000, 0b0011000000000000, 0b1111000000000000, 0b0000110000000000, 0b1100110000000000, 0b0011110000000000, 0b1111110000000000,
   0b0000001100000000, 0b1100001100000000, 0b0011001100000000, 0b1111001100000000, 0b0000111100000000, 0b1100111100000000, 0b0011111100000000, 0b1111111100000000,
   0b0000000011000000, 0b1100000011000000, 0b0011000011000000, 0b1111000011000000, 0b0000110011000000, 0b1100110011000000, 0b0011110011000000, 0b1111110011000000,
@@ -72,7 +72,7 @@ const uint16_t PNGTable::EXPANDED_REVERSED_BYTES[256] = {
   0b0000001111111111, 0b1100001111111111, 0b0011001111111111, 0b1111001111111111, 0b0000111111111111, 0b1100111111111111, 0b0011111111111111, 0b1111111111111111
 };
 
-uint16_t PNGTable::interleaveBytes(byte hi, byte lo) {
+uint16_t IndexedTable::interleaveBytes(byte hi, byte lo) {
   uint16_t hiWide = EXPANDED_REVERSED_BYTES[hi] & 0b1010101010101010;
   uint16_t loWide = EXPANDED_REVERSED_BYTES[lo] & 0b0101010101010101;
   return hiWide | loWide;
